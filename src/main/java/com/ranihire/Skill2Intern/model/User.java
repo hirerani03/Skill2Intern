@@ -11,6 +11,9 @@ public class User {
     private String userName;
     private String password;
 
+    @OneToOne(mappedBy = "user")
+    private CandidateProfile candidateProfile;
+
     public User() {
     }
 
@@ -34,6 +37,14 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public CandidateProfile getCandidateProfile() {
+        return candidateProfile;
+    }
+
+    public void setCandidateProfile(CandidateProfile candidateProfile) {
+        this.candidateProfile = candidateProfile;
     }
 
     public String getPassword() {

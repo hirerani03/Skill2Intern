@@ -24,6 +24,10 @@ public class CandidateProfile {
     @Column(columnDefinition = "TEXT")
     private String bio;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public CandidateProfile() {
     }
 
@@ -32,7 +36,7 @@ public class CandidateProfile {
                             String branch, int passoutYear, double cgpa,
                             String experienceType, String college,
                             String githubUrl, String linkedinUrl, String portfolioUrl,
-                            String bio) {
+                            String bio, User user) {
         this.candidateId = candidateId;
         this.name = name;
         this.mobile = mobile;
@@ -48,6 +52,7 @@ public class CandidateProfile {
         this.linkedinUrl = linkedinUrl;
         this.portfolioUrl = portfolioUrl;
         this.bio = bio;
+        this.user = user;
     }
 
 
@@ -171,4 +176,11 @@ public class CandidateProfile {
         this.bio = bio;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

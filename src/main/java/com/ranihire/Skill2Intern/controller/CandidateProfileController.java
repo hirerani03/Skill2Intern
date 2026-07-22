@@ -55,7 +55,7 @@ public class CandidateProfileController {
 
 
 
-UserProfile existingProfile = userProfileRepository.findByUserId(userProfile.getUser().getId());
+//UserProfile existingProfile = userProfileRepository.findByUserId(userProfile.getUser().getId());
 //
 //        if (existingProfile != null) {
 //            return "Profile already exists for this user.";
