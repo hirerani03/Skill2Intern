@@ -1,33 +1,31 @@
 package com.ranihire.Skill2Intern.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int userId;
     private String userName;
     private String password;
 
     public User() {
     }
 
-    public User(int id, String userName, String password) {
-        this.id = id;
+    public User(int userId, String userName, String password) {
+        this.userId = userId;
         this.userName = userName;
         this.password = password;
     }
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
