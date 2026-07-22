@@ -1,6 +1,5 @@
 package com.ranihire.Skill2Intern.controller;
 
-import com.ranihire.Skill2Intern.model.UserProfile;
 import com.ranihire.Skill2Intern.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
