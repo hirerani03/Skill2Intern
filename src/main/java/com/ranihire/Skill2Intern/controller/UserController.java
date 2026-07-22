@@ -32,13 +32,5 @@ public class UserController {
             return "Invalid Password";
         }
     }
-    @GetMapping("/getAllUsers")
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
 
-    @GetMapping("/getUser/{id}")
-    public User getUser(@PathVariable Integer id) {
-        return userRepository.findById(id).get();
-    }
 }
