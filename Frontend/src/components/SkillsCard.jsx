@@ -1,5 +1,5 @@
 import React from 'react'
-
+import RoleCard from './RoleCard'
 const SkillsCard = () => {
   return (
     <div>
@@ -11,8 +11,3 @@ const SkillsCard = () => {
 export default SkillsCard
 
 
-// rolecard la candidate details form kadun user id yetey ka adhi check kelay 
-// ani ti user id ata skillscard la pathvaychi
-// tyach user id la he roles save karayche database mde
-// updateprofile api mde tyasathi hi roles chi field, getter-setter sagla update karav lagal   
-// then skillscard vr kam karaycha

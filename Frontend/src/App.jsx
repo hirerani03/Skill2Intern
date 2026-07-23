@@ -5,8 +5,8 @@ import RoleCard from "./components/RoleCard"
 function App() {    
   return (
     <div>
-      <AuthForm/>
-      {/* <RoleCard/> */}
+      {/* <AuthForm/> */}
+      <RoleCard/>
       {/* <CandidateDetailsForm/> */}
     </div>
   )
