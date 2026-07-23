@@ -19,16 +19,16 @@ public class CandidateProfileController {
         return candidateProfileRepository.save(candidateProfile);
     }
 
-    @GetMapping("/getCandidateProfile/{id}")
-    public CandidateProfile  getCandidateProfile(@PathVariable Integer id){
-        return candidateProfileRepository.findById(id).orElse(null);
+    @GetMapping("/getCandidateProfile/{candidateId}")
+    public CandidateProfile  getCandidateProfile(@PathVariable Integer candidateId){
+        return candidateProfileRepository.findById(candidateId).orElse(null);
     }
 
-    @PutMapping("/updateCandidateProfile/{id}")
-    public CandidateProfile updateProfile(@PathVariable int id,
+    @PutMapping("/updateCandidateProfile/{candidateId}")
+    public CandidateProfile updateProfile(@PathVariable int candidateId,
                                      @RequestBody CandidateProfile updatingProfile) {
 
-        CandidateProfile existingProfile = candidateProfileRepository.findById(id).orElse(null);
+        CandidateProfile existingProfile = candidateProfileRepository.findById(candidateId).orElse(null);
 
         if (existingProfile == null) {
             return null;
@@ -50,13 +50,3 @@ public class CandidateProfileController {
         return candidateProfileRepository.save(existingProfile);
     }
 }
-
-
-
-
-
-//UserProfile existingProfile = userProfileRepository.findByUserId(userProfile.getUser().getId());
-//
-//        if (existingProfile != null) {
-//            return "Profile already exists for this user.";
-//        }
