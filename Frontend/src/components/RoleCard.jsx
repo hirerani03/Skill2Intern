@@ -13,13 +13,24 @@ const RoleCard = ({ userId }) => {
         .get(`http://localhost:8080/roles/recommended/${userId}`)
         .then((response) => {
             setRecommendedRoles(response.data);
-            setAllRoles(response.data);
-            console.log(response.data);
         })
         .catch((error) => {
             console.error(error);
         });
     }, [userId]);
+
+    useEffect(() => {
+
+        axios
+            .get(`http://localhost:8080/roles`)
+            .then((response) => {
+                setAllRoles(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
+    }, []);
 
     // Select role
     const handleRoleSelect = (role) => {
