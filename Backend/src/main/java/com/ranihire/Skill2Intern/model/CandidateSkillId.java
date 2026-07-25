@@ -4,44 +4,46 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class CandidateSkillId implements Serializable {
-    private Integer candidateId;
-    private Integer skillId;
+    private Integer candidateProfile;
+    private Integer skill;
 
     public CandidateSkillId() {
     }
 
-    public CandidateSkillId(Integer candidateId, Integer skillId) {
-        this.candidateId = candidateId;
-        this.skillId = skillId;
+    public CandidateSkillId(Integer candidateProfile, Integer skill) {
+        this.candidateProfile = candidateProfile;
+        this.skill = skill;
     }
 
-    public Integer getCandidateId() {
-        return candidateId;
+    public Integer getCandidateProfile() {
+        return candidateProfile;
     }
 
-    public void setCandidateId(Integer candidateId) {
-        this.candidateId = candidateId;
+    public void setCandidateProfile(Integer candidateProfile) {
+        this.candidateProfile = candidateProfile;
     }
 
-    public Integer getSkillId() {
-        return skillId;
+    public Integer getSkill() {
+        return skill;
     }
 
-    public void setSkillId(Integer skillId) {
-        this.skillId = skillId;
+    public void setSkill(Integer skill) {
+        this.skill = skill;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof CandidateSkillId)) return false;
+
         CandidateSkillId that = (CandidateSkillId) o;
-        return Objects.equals(candidateId, that.candidateId) &&
-                Objects.equals(skillId, that.skillId);
+
+        return Objects.equals(candidateProfile, that.candidateProfile)
+                && Objects.equals(skill, that.skill);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(candidateId, skillId);
+        return Objects.hash(candidateProfile, skill);
     }
 }
