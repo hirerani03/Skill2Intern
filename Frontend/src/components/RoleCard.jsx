@@ -19,7 +19,7 @@ const RoleCard = ({ userId }) => {
   const [selectedRoles, setSelectedRoles] = useState([]);
   const [searchRole, setSearchRole] = useState("");
   const [showSkillsCard, setShowSkillsCard] = useState(false);
-  console.log("RoleCard User ID:", userId);
+  
   
   if (showSkillsCard) {
     return <SkillsCard />;

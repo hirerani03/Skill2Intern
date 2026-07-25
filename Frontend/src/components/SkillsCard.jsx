@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import RoleCard from "./RoleCard";
 const SkillsCard = ({ userId }) => {
   const [skills, setSkills] = useState([]);
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [searchSkill, setSearchSkill] = useState("");
+  const [showRoleCard, setShowRoleCard] = useState(false);
   useEffect(() => {
     axios
       .get("http://localhost:8080/skills")
@@ -15,6 +17,26 @@ const SkillsCard = ({ userId }) => {
       });
   }, []);
 
+  const handleNext = () => {
+    
+    const request = {
+        candidateId: userId,
+        skillIds: selectedSkills.map(skill => skill.skillId)
+    };
+
+    axios.post("http://localhost:8080/candidate-skills", request)
+        .then(() => {
+          setShowRoleCard(true);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+  };
+
+  if (showRoleCard) {
+    return <RoleCard userId={userId} />;
+  }
   return (
     <div className="role-container">
         <h2>Choose Your Skills</h2>
@@ -77,7 +99,10 @@ const SkillsCard = ({ userId }) => {
           ))}
       </div>
 
-       <button disabled={selectedSkills.length === 0}>
+       <button 
+        disabled={selectedSkills.length === 0}
+        onClick={handleNext}
+       >
         Next
       </button>
       
