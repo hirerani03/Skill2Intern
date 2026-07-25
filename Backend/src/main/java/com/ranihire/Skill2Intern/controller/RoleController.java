@@ -22,4 +22,9 @@ public class RoleController {
     public List<Role> getRecommendedRoles(@PathVariable Integer candidateId) {
         return roleService.getRecommendedRoles(candidateId);
     }
+
+    @GetMapping("/roles")
+    public List<Role> getAllRoles() {
+        return roleService.getAllRoles();
+    }
 }
