@@ -2,25 +2,24 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const RoleCard = ({ userId }) => {
-    const [recommendedRoles, setRecommendedRoles] = useState([]);
     const [allRoles, setAllRoles] = useState([]);
     const [selectedRoles, setSelectedRoles] = useState([]);
+    const [recommendedRoles, setRecommendedRoles] = useState([]);
     const [searchRole, setSearchRole] = useState("");
 
     // Fetch recommended roles based on selected skills
     useEffect(() => {
-    axios
-        .get(`http://localhost:8080/roles/recommended/${userId}`)
-        .then((response) => {
-            setRecommendedRoles(response.data);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+        axios
+            .get(`http://localhost:8080/roles/recommended/${userId}`)
+            .then((response) => {
+                setRecommendedRoles(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }, [userId]);
 
     useEffect(() => {
-
         axios
             .get(`http://localhost:8080/roles`)
             .then((response) => {
@@ -29,49 +28,58 @@ const RoleCard = ({ userId }) => {
             .catch((error) => {
                 console.error(error);
             });
-
     }, []);
 
-    // Select role
+    const handleNext = () => {
+    
+        const request = {
+            candidateId: userId,
+            roleIds: selectedRoles.map(role => role.roleId)
+        };
+
+        axios.post("http://localhost:8080/candidate-roles", request)
+            .then(() => {
+                setDashboard(true);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+  };
     const handleRoleSelect = (role) => {
-
         setSelectedRoles([...selectedRoles, role]);
-
-        setRecommendedRoles(
-            recommendedRoles.filter(
-                (recommendedRole) =>
-                    recommendedRole.roleId !== role.roleId
-            )
-        );
     };
 
      // Remove selected role
     const handleRemoveRole = (roleId) => {
-
-        const removedRole = selectedRoles.find(
-            (role) => role.roleId === roleId
-        );
-
-
         setSelectedRoles(
             selectedRoles.filter(
                 (role) => role.roleId !== roleId
             )
         );
-
-
-        setRecommendedRoles([
-            ...recommendedRoles,
-            removedRole
-        ]);
     };
 
-    // Search all roles
-    const filteredRoles = allRoles.filter((role) =>
+    // Search in recommended roles
+    const filteredRecommendedRoles = recommendedRoles.filter((role) =>
         role.roleName
             .toLowerCase()
             .includes(searchRole.toLowerCase())
     );
+
+    // Search in popular roles (all roles except recommended)
+    const filteredPopularRoles = allRoles
+        .filter(
+            (role) =>
+                !recommendedRoles.some(
+                    (recommendedRole) =>
+                        recommendedRole.roleId === role.roleId
+                )
+        )
+        .filter((role) =>
+            role.roleName
+                .toLowerCase()
+                .includes(searchRole.toLowerCase())
+        );
 
   return (
     <div className="role-container">
@@ -79,48 +87,47 @@ const RoleCard = ({ userId }) => {
 
         {/* Selected Roles */}
 
-            {selectedRoles.map((role) => (
+        {selectedRoles.map((role) => (
 
-                <button
-                    key={role.roleId}
-                    className="selected-role-btn"
+            <button
+                key={role.roleId}
+                className="selected-role-btn"
+            >
+                {role.roleName}
+                <span
+                    className="remove-role"
+                    onClick={() =>
+                        handleRemoveRole(role.roleId)
+                    }
                 >
+                ✕
+                </span>
 
-                    {role.roleName}
+            </button>
 
+        ))}
 
-                    <span
-                        className="remove-role"
-                        onClick={() =>
-                            handleRemoveRole(role.roleId)
-                        }
-                    >
-                        ✕
-                    </span>
+        {/* Search */}
 
-                </button>
+        <input
+            type="text"
+            placeholder="Search roles..."
+            value={searchRole}
+            onChange={(e) =>
+                setSearchRole(e.target.value)
+            }
+        />
 
-            ))}
+        <p>You can select multiple roles</p>
+          
+        {/* Recommended Roles */}
 
+        {filteredRecommendedRoles.length > 0 && (
+            <>
+                <h3>⭐ Recommended for You</h3>
 
-
-            {/* Search */}
-
-            <input
-                type="text"
-                placeholder="Search roles..."
-                value={searchRole}
-                onChange={(e) =>
-                    setSearchRole(e.target.value)
-                }
-            />
-            <p>You can select multiple roles</p>
-             {/* Recommended Roles */}
-
-            <div className="popular-roles">
-
-                {
-                    filteredRoles
+                <div className="recommended-roles">
+                {filteredRecommendedRoles
                     .filter(
                         (role) =>
                             !selectedRoles.some(
@@ -128,23 +135,50 @@ const RoleCard = ({ userId }) => {
                                     selectedRole.roleId === role.roleId
                             )
                     )
-                    .map((role)=>(
-
+                    .map((role) => (
                         <button
                             key={role.roleId}
-                            onClick={() =>
-                                handleRoleSelect(role)
-                            }
+                            onClick={() => handleRoleSelect(role)}
                         >
                             {role.roleName}
-
                         </button>
+                    ))}
+                </div>
+            </>
+        )}       
 
-                    ))
-                }
+        {filteredPopularRoles.length > 0 && (
+            <>
+                <h3>🔥 Popular Roles</h3>
 
-            </div>
+                <div className="popular-roles">
+                    {filteredPopularRoles
+                        .filter(
+                            (role) =>
+                                !selectedRoles.some(
+                                    (selectedRole) =>
+                                        selectedRole.roleId === role.roleId
+                                )
+                        )
+                        .map((role) => (
+                            <button
+                                key={role.roleId}
+                                onClick={() => handleRoleSelect(role)}
+                            >
+                                {role.roleName}
+                            </button>
+                        ))}
+                </div>
+            </>
+        )}
 
+        <button 
+            disabled={selectedRoles.length === 0}
+            onClick={handleNext}
+        >
+            Next
+        </button>
+        
     </div>
   )
 }

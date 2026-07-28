@@ -99,10 +99,10 @@ const SkillsCard = ({ userId }) => {
           ))}
       </div>
 
-       <button 
+      <button 
         disabled={selectedSkills.length === 0}
         onClick={handleNext}
-       >
+      >
         Next
       </button>
       
