@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import DashboardCard from "./DashboardCard";
 
 const RoleCard = ({ userId }) => {
     const [allRoles, setAllRoles] = useState([]);
     const [selectedRoles, setSelectedRoles] = useState([]);
     const [recommendedRoles, setRecommendedRoles] = useState([]);
     const [searchRole, setSearchRole] = useState("");
+    const [Dashboard, setDashboard] = useState("");
 
     // Fetch recommended roles based on selected skills
     useEffect(() => {
@@ -81,7 +83,9 @@ const RoleCard = ({ userId }) => {
                 .includes(searchRole.toLowerCase())
         );
 
-    
+    if (Dashboard) {
+        return <DashboardCard userId={userId} />;
+      }
 
   return (
     <div className="role-container">
