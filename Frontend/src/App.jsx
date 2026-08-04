@@ -6,8 +6,8 @@ import SkillsCard from "./components/SkillsCard"
 function App() {    
   return (
     <div>
-      {/* <AuthForm/> */}
-      <RoleCard/>
+      <AuthForm/>
+      {/* <RoleCard/> */}
     </div>
   )
 }
