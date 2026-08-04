@@ -45,7 +45,7 @@ const RoleCard = ({ userId }) => {
                 console.error(error);
             });
 
-  };
+    };
     const handleRoleSelect = (role) => {
         setSelectedRoles([...selectedRoles, role]);
     };
@@ -80,6 +80,8 @@ const RoleCard = ({ userId }) => {
                 .toLowerCase()
                 .includes(searchRole.toLowerCase())
         );
+
+    
 
   return (
     <div className="role-container">
