@@ -141,3 +141,71 @@ INSERT IGNORE INTO role_skill VALUES (10,57);
 INSERT IGNORE INTO role_skill VALUES (10,58);
 INSERT IGNORE INTO role_skill VALUES (10,56);
 INSERT IGNORE INTO role_skill VALUES (10,59);
+
+-- Company Meta Data
+INSERT IGNORE INTO company
+(company_name, about, website, industry, location, logo_url, company_size)
+VALUES
+('Google',
+'Global technology company specializing in internet services, cloud computing, AI, and digital advertising.',
+'https://about.google/',
+'Information Technology',
+'Bengaluru',
+'https://logo.clearbit.com/google.com',
+'100000+'),
+
+('Microsoft',
+'Multinational technology company developing software, cloud services, and AI solutions.',
+'https://www.microsoft.com/',
+'Information Technology',
+'Hyderabad',
+'https://logo.clearbit.com/microsoft.com',
+'220000+'),
+
+('Amazon',
+'Global e-commerce and cloud computing company offering technology-driven products and services.',
+'https://www.amazon.jobs/',
+'E-commerce',
+'Hyderabad',
+'https://logo.clearbit.com/amazon.com',
+'1500000+'),
+
+('Infosys',
+'Indian multinational company providing IT consulting and digital transformation services.',
+'https://www.infosys.com/',
+'Information Technology',
+'Pune',
+'https://logo.clearbit.com/infosys.com',
+'300000+'),
+
+('TCS',
+'Leading IT services, consulting, and business solutions company.',
+'https://www.tcs.com/',
+'Information Technology',
+'Pune',
+'https://logo.clearbit.com/tcs.com',
+'600000+'),
+
+('Accenture',
+'Global professional services company specializing in consulting, technology, and operations.',
+'https://www.accenture.com/',
+'Consulting',
+'Bengaluru',
+'https://logo.clearbit.com/accenture.com',
+'700000+'),
+
+('Cognizant',
+'IT services and consulting company helping enterprises modernize technology.',
+'https://www.cognizant.com/',
+'Information Technology',
+'Chennai',
+'https://logo.clearbit.com/cognizant.com',
+'340000+'),
+
+('Capgemini',
+'Global consulting and technology services company.',
+'https://www.capgemini.com/',
+'Information Technology',
+'Mumbai',
+'https://logo.clearbit.com/capgemini.com',
+'360000+');
