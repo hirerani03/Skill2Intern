@@ -15,18 +15,9 @@ public class InternshipController {
         this.internshipService = internshipService;
     }
 
-    @PostMapping("/internships")
-    public Internship addInternship(@RequestBody Internship internship) {
-        return internshipService.addInternship(internship);
+    @GetMapping("/internships/recommended/{candidateId}")
+    public List<Internship> getRecommendedInternships(@PathVariable Integer candidateId) {
+        return internshipService.getRecommendedInternships(candidateId);
     }
 
-    @GetMapping("/internships")
-    public List<Internship> getAllInternships() {
-        return internshipService.getAllInternships();
-    }
-
-    @GetMapping("/internships/{internshipId}")
-    public Internship getInternshipById(@PathVariable Integer internshipId) {
-        return internshipService.getInternshipById(internshipId);
-    }
 }
