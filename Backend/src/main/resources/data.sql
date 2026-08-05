@@ -209,3 +209,214 @@ VALUES
 'Mumbai',
 'https://logo.clearbit.com/capgemini.com',
 '360000+');
+
+-- internship meta data
+INSERT IGNORE INTO internship
+(title, internship_type, location, stipend, duration, openings, eligibility,
+description, responsibilities, recruitment_process, posted_date,
+application_deadline, status, role_id, company_id)
+VALUES
+('Java Developer Intern',
+'ONSITE',
+'Pune',
+'₹30,000/month',
+'6 Months',
+5,
+'B.E/B.Tech Computer Engineering, Java, OOP, SQL',
+'Work on enterprise Java applications using Spring Boot.',
+'Develop REST APIs, Fix bugs, Write unit tests, Participate in code reviews.',
+'Online Assessment -> Technical Interview -> HR Interview',
+DATE_SUB(NOW(), INTERVAL 2 HOUR),
+'2026-08-31',
+'OPEN',
+1,
+4);
+
+INSERT IGNORE INTO internship
+(title, internship_type, location, stipend, duration, openings, eligibility,
+description, responsibilities, recruitment_process, posted_date,
+application_deadline, status, role_id, company_id)
+VALUES
+('Backend Developer Intern',
+'HYBRID',
+'Hyderabad',
+'₹45,000/month',
+'6 Months',
+4,
+'Java, Spring Boot, MySQL',
+'Develop scalable backend services.',
+'Build REST APIs, Database Design, API Testing.',
+'OA -> Technical -> Managerial',
+DATE_SUB(NOW(), INTERVAL 5 HOUR),
+'2026-08-28',
+'OPEN',
+2,
+2);
+
+INSERT IGNORE INTO internship
+(title, internship_type, location, stipend, duration, openings, eligibility,
+description, responsibilities, recruitment_process, posted_date,
+application_deadline, status, role_id, company_id)
+VALUES
+('Frontend Developer Intern',
+'REMOTE',
+'Bengaluru',
+'₹35,000/month',
+'4 Months',
+6,
+'HTML, CSS, JavaScript, React',
+'Develop responsive user interfaces.',
+'Create React components, Fix UI bugs, Consume REST APIs.',
+'Resume Screening -> Technical Interview',
+DATE_SUB(NOW(), INTERVAL 1 DAY),
+'2026-08-30',
+'OPEN',
+3,
+1);
+
+INSERT IGNORE INTO internship
+(title, internship_type, location, stipend, duration, openings, eligibility,
+description, responsibilities, recruitment_process, posted_date,
+application_deadline, status, role_id, company_id)
+VALUES
+('Full Stack Developer Intern',
+'HYBRID',
+'Hyderabad',
+'₹50,000/month',
+'6 Months',
+3,
+'React, Spring Boot, MySQL',
+'Build complete full stack applications.',
+'Frontend Development, Backend APIs, Database Integration.',
+'OA -> Technical Interview',
+DATE_SUB(NOW(), INTERVAL 2 DAY),
+'2026-09-05',
+'OPEN',
+4,
+3);
+
+INSERT IGNORE INTO internship
+(title, internship_type, location, stipend, duration, openings, eligibility,
+description, responsibilities, recruitment_process, posted_date,
+application_deadline, status, role_id, company_id)
+VALUES
+('Software Engineer Intern',
+'ONSITE',
+'Bengaluru',
+'₹40,000/month',
+'6 Months',
+8,
+'Java/Python, DSA, DBMS',
+'Develop software products with engineering teams.',
+'Coding, Testing, Debugging.',
+'Coding Test -> Technical -> HR',
+DATE_SUB(NOW(), INTERVAL 3 DAY),
+'2026-08-27',
+'OPEN',
+5,
+6);
+
+INSERT IGNORE INTO internship
+(title, internship_type, location, stipend, duration, openings, eligibility,
+description, responsibilities, recruitment_process, posted_date,
+application_deadline, status, role_id, company_id)
+VALUES
+('Data Analyst Intern',
+'HYBRID',
+'Chennai',
+'₹28,000/month',
+'5 Months',
+5,
+'SQL, Excel, Python',
+'Analyze business datasets.',
+'Data Cleaning, Dashboard Creation, Reporting.',
+'Technical Interview',
+DATE_SUB(NOW(), INTERVAL 4 DAY),
+'2026-08-29',
+'OPEN',
+6,
+7);
+
+INSERT IGNORE INTO internship
+(title, internship_type, location, stipend, duration, openings, eligibility,
+description, responsibilities, recruitment_process, posted_date,
+application_deadline, status, role_id, company_id)
+VALUES
+('Data Engineer Intern',
+'ONSITE',
+'Mumbai',
+'₹42,000/month',
+'6 Months',
+3,
+'Python, SQL, ETL',
+'Develop data pipelines.',
+'ETL Development, Database Optimization.',
+'Coding + Technical',
+DATE_SUB(NOW(), INTERVAL 5 DAY),
+'2026-09-02',
+'OPEN',
+7,
+8);
+
+INSERT IGNORE INTO internship
+(title, internship_type, location, stipend, duration, openings, eligibility,
+description, responsibilities, recruitment_process, posted_date,
+application_deadline, status, role_id, company_id)
+VALUES
+('Machine Learning Intern',
+'REMOTE',
+'Bengaluru',
+'₹55,000/month',
+'6 Months',
+2,
+'Python, TensorFlow, Machine Learning',
+'Develop ML models for production.',
+'Data Preparation, Model Training, Evaluation.',
+'Technical Interview',
+DATE_SUB(NOW(), INTERVAL 6 DAY),
+'2026-09-10',
+'OPEN',
+8,
+1);
+
+INSERT IGNORE INTO internship
+(title, internship_type, location, stipend, duration, openings, eligibility,
+description, responsibilities, recruitment_process, posted_date,
+application_deadline, status, role_id, company_id)
+VALUES
+('DevOps Intern',
+'HYBRID',
+'Hyderabad',
+'₹48,000/month',
+'6 Months',
+2,
+'AWS, Docker, Linux',
+'Support cloud infrastructure.',
+'CI/CD, Docker, Monitoring.',
+'Technical Interview',
+DATE_SUB(NOW(), INTERVAL 7 DAY),
+'2026-09-01',
+'OPEN',
+9,
+2);
+
+INSERT IGNORE INTO internship
+(title, internship_type, location, stipend, duration, openings, eligibility,
+description, responsibilities, recruitment_process, posted_date,
+application_deadline, status, role_id, company_id)
+VALUES
+('Android Developer Intern',
+'ONSITE',
+'Pune',
+'₹30,000/month',
+'4 Months',
+4,
+'Java/Kotlin, Android Studio',
+'Develop Android applications.',
+'UI Development, API Integration, Testing.',
+'Coding Test -> Technical',
+DATE_SUB(NOW(), INTERVAL 8 DAY),
+'2026-08-26',
+'OPEN',
+10,
+5);
