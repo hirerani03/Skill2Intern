@@ -1,6 +1,6 @@
 package com.ranihire.Skill2Intern.controller;
 
-import com.ranihire.Skill2Intern.model.Internship;
+import com.ranihire.Skill2Intern.dto.RecommendedInternshipResponse;
 import com.ranihire.Skill2Intern.service.InternshipService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +16,7 @@ public class InternshipController {
     }
 
     @GetMapping("/internships/recommended/{candidateId}")
-    public List<Internship> getRecommendedInternships(@PathVariable Integer candidateId) {
+    public List<RecommendedInternshipResponse> getRecommendedInternships(@PathVariable Integer candidateId) {
         return internshipService.getRecommendedInternships(candidateId);
     }
 

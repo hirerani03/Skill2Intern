@@ -16,4 +16,12 @@ public interface InternshipSkillRepository  extends JpaRepository<InternshipSkil
        WHERE ins.skill.skillId IN :skillIds
        """)
     List<Internship> findRecommendedInternships(@Param("skillIds") List<Integer> skillIds);
+
+    @Query("""
+           SELECT ins.skill.skillId
+           FROM InternshipSkill ins
+           WHERE ins.internship.internshipId = :internshipId
+           """)
+    List<Integer> findSkillIdsByInternshipId(
+            @Param("internshipId") Integer internshipId);
 }

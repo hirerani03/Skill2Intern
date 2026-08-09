@@ -18,61 +18,44 @@ const DashboardCard = ({ userId }) => {
     }, [userId]);
 
   return (
-    <div className="dashboard">
+    <div>
       <h2>Recommended Internships</h2>
 
-            {internships.length === 0 ? (
-                <p>No internships found based on your skills.</p>
-            ) : (
+            {internships.map((internship) => (
+                <div key={internship.internshipId}>
 
-                <div className="internship-list">
+                    <h3>{internship.title}</h3>
 
-                    {internships.map((internship) => (
+                    <p>
+                        Company: {internship.company.companyName}
+                    </p>
 
-                        <div
-                            className="internship-card"
-                            key={internship.internshipId}
-                        >
+                    <img
+                        src={internship.company.logoUrl}
+                        alt={internship.company.companyName}
+                    />
+                    <p>
+                        Location: {internship.location}
+                    </p>
 
-                            <h3>{internship.title}</h3>
+                    <p>
+                        Stipend: {internship.stipend}
+                    </p>
 
-                            <p>
-                                <strong>Company:</strong>{" "}
-                                {internship.company?.companyName}
-                            </p>
+                    <p>
+                        Duration: {internship.duration}
+                    </p>
 
-                            <p>
-                                <strong>Location:</strong>{" "}
-                                {internship.location}
-                            </p>
+                    <p>
+                        Apply Before: {internship.applicationDeadline}
+                    </p>
 
-                            <p>
-                                <strong>Type:</strong>{" "}
-                                {internship.internshipType}
-                            </p>
-
-                            <p>
-                                <strong>Duration:</strong>{" "}
-                                {internship.duration}
-                            </p>
-
-                            <p>
-                                <strong>Stipend:</strong>{" "}
-                                {internship.stipend}
-                            </p>
-
-                            <p>
-                                <strong>Apply Before:</strong>{" "}
-                                {internship.applicationDeadline}
-                            </p>
-
-                        </div>
-
-                    ))}
+                    <p>
+                        Posted Date: {internship.postedDate}
+                    </p>
 
                 </div>
-
-            )}
+            ))}
 
     </div>
   )
