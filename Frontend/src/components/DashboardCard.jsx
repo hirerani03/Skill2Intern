@@ -21,41 +21,50 @@ const DashboardCard = ({ userId }) => {
     <div>
       <h2>Recommended Internships</h2>
 
-            {internships.map((internship) => (
-                <div key={internship.internshipId}>
+            {internships.map((recommended) => {
 
-                    <h3>{internship.title}</h3>
+                const internship = recommended.internship;
 
-                    <p>
-                        Company: {internship.company.companyName}
-                    </p>
+                return (
+                    <div key={internship.internshipId}>
 
-                    <img
-                        src={internship.company.logoUrl}
-                        alt={internship.company.companyName}
-                    />
-                    <p>
-                        Location: {internship.location}
-                    </p>
+                        <h3>{internship.title}</h3>
 
-                    <p>
-                        Stipend: {internship.stipend}
-                    </p>
+                        <p>
+                           {internship.company.companyName}
+                        </p>
 
-                    <p>
-                        Duration: {internship.duration}
-                    </p>
+                        <img
+                            src={internship.company.logoUrl}
+                            alt={internship.company.companyName}
+                        />
 
-                    <p>
-                        Apply Before: {internship.applicationDeadline}
-                    </p>
+                        <p>
+                            Location: {internship.location}
+                        </p>
 
-                    <p>
-                        Posted Date: {internship.postedDate}
-                    </p>
+                        <p>
+                            Stipend: {internship.stipend}
+                        </p>
 
-                </div>
-            ))}
+                        <p>
+                            Duration: {internship.duration}
+                        </p>
+
+                         <p>
+                            Skill Match: {recommended.skillMatchPercentage}%
+                        </p>
+                        <p>
+                            Apply Before: {internship.applicationDeadline}
+                        </p>
+
+                        <p>
+                            Posted Date: {internship.postedDate}
+                        </p>
+
+                    </div>
+                );
+            })}
 
     </div>
   )
