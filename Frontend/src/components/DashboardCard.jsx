@@ -73,15 +73,15 @@ const DashboardCard = ({ userId }) => {
                         />
 
                         <p>
-                            Location: {internship.location}
+                            📍 {internship.location}
                         </p>
 
                         <p>
-                            Stipend: {internship.stipend}
+                            💰 {internship.stipend}
                         </p>
 
                         <p>
-                            Duration: {internship.duration}
+                            🕒 {internship.duration}
                         </p>
 
                          <p>
@@ -92,7 +92,7 @@ const DashboardCard = ({ userId }) => {
                         </p>
 
                         <p>
-                           Posted: {getTimeAgo(internship.postedDate)}
+                            🕒 {getTimeAgo(internship.postedDate)}
                         </p>
 
                     </div>
