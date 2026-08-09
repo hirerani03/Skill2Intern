@@ -1,106 +1,168 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+// import "../styling/Dashboard.css";
+import '../App.css'
 const DashboardCard = ({ userId }) => {
-   const [internships, setInternships] = useState([]);
+    const [internships, setInternships] = useState([]);
 
     const getTimeAgo = (postedDate) => {
-    const posted = new Date(postedDate);
-    const now = new Date();
+        const posted = new Date(postedDate);
+        const now = new Date();
 
-    const diffInSeconds = Math.floor((now - posted) / 1000);
+        const diffInSeconds = Math.floor((now - posted) / 1000);
 
-    if (diffInSeconds < 60) {
-        return "Just now";
-    }
+        if (diffInSeconds < 60) {
+            return "Just now";
+        }
 
-    const diffInMinutes = Math.floor(diffInSeconds / 60);
+        const diffInMinutes = Math.floor(diffInSeconds / 60);
 
-    if (diffInMinutes < 60) {
-        return `${diffInMinutes} ${diffInMinutes === 1 ? "minute" : "minutes"} ago`;
-    }
+        if (diffInMinutes < 60) {
+            return `${diffInMinutes} ${
+                diffInMinutes === 1 ? "minute" : "minutes"
+            } ago`;
+        }
 
-    const diffInHours = Math.floor(diffInMinutes / 60);
+        const diffInHours = Math.floor(diffInMinutes / 60);
 
-    if (diffInHours < 24) {
-        return `${diffInHours} ${diffInHours === 1 ? "hour" : "hours"} ago`;
-    }
+        if (diffInHours < 24) {
+            return `${diffInHours} ${
+                diffInHours === 1 ? "hour" : "hours"
+            } ago`;
+        }
 
-    const diffInDays = Math.floor(diffInHours / 24);
+        const diffInDays = Math.floor(diffInHours / 24);
 
-    if (diffInDays < 30) {
-        return `${diffInDays} ${diffInDays === 1 ? "day" : "days"} ago`;
-    }
+        if (diffInDays < 30) {
+            return `${diffInDays} ${
+                diffInDays === 1 ? "day" : "days"
+            } ago`;
+        }
 
-    const diffInMonths = Math.floor(diffInDays / 30);
+        const diffInMonths = Math.floor(diffInDays / 30);
 
-    return `${diffInMonths} ${diffInMonths === 1 ? "month" : "months"} ago`;
-};
+        return `${diffInMonths} ${
+            diffInMonths === 1 ? "month" : "months"
+        } ago`;
+    };
 
     useEffect(() => {
-
         axios
             .get(`http://localhost:8080/internships/recommended/${userId}`)
             .then((response) => {
                 setInternships(response.data);
             })
             .catch((error) => {
-                console.error("Error fetching recommended internships:", error);
+                console.error(
+                    "Error fetching recommended internships:",
+                    error
+                );
             });
-
     }, [userId]);
 
-  return (
-    <div>
-      <h2>Recommended Internships</h2>
+    return (
+        <div className="dashboard-container">
 
-            {internships.map((recommended) => {
+            <h2 className="dashboard-title">
+                Recommended Internships
+            </h2>
 
-                const internship = recommended.internship;
+            <div className="internship-list">
 
-                return (
-                    <div key={internship.internshipId}>
+                {internships.map((recommended) => {
 
-                        <h3>{internship.title}</h3>
+                    const internship = recommended.internship;
 
-                        <p>
-                           {internship.company.companyName}
-                        </p>
+                    return (
+                        <div
+                            className="internship-card"
+                            key={internship.internshipId}
+                            onClick={() =>
+                                console.log(
+                                    "Selected internship:",
+                                    internship.internshipId
+                                )
+                            }
+                        >
 
-                        <img
-                            src={internship.company.logoUrl}
-                            alt={internship.company.companyName}
-                        />
+                            {/* Top Section */}
+                            <div className="internship-header">
 
-                        <p>
-                            📍 {internship.location}
-                        </p>
+                                <div className="company-info">
 
-                        <p>
-                            💰 {internship.stipend}
-                        </p>
+                                    <img
+                                        className="company-logo"
+                                        src={internship.company.logoUrl}
+                                        alt={internship.company.companyName}
+                                    />
 
-                        <p>
-                            🕒 {internship.duration}
-                        </p>
+                                    <div>
+                                        <h3>
+                                            {internship.title}
+                                        </h3>
 
-                         <p>
-                            Skill Match: {recommended.skillMatchPercentage}%
-                        </p>
-                        <p>
-                            Apply Before: {internship.applicationDeadline}
-                        </p>
+                                        <p className="company-name">
+                                            {internship.company.companyName}
+                                        </p>
+                                    </div>
 
-                        <p>
-                            🕒 {getTimeAgo(internship.postedDate)}
-                        </p>
+                                </div>
 
-                    </div>
-                );
-            })}
+                                <span
+                                    className={`skill-match ${
+                                        recommended.skillMatchPercentage >= 80
+                                            ? "high-match"
+                                            : recommended.skillMatchPercentage >= 50
+                                            ? "medium-match"
+                                            : "low-match"
+                                    }`}
+                                >
+                                    {recommended.skillMatchPercentage}% Match
+                                </span>
 
-    </div>
-  )
-}
+                            </div>
 
-export default DashboardCard
+
+                            {/* Internship Information */}
+                            <div className="internship-info">
+
+                                <span>
+                                    📍 {internship.location}
+                                </span>
+
+                                <span>
+                                    💰 {internship.stipend}
+                                </span>
+
+                                <span>
+                                    🕒 {internship.duration}
+                                </span>
+
+                            </div>
+
+
+                            {/* Bottom Section */}
+                            <div className="internship-footer">
+
+                                <span className="posted-time">
+                                    📅 {getTimeAgo(internship.postedDate)}
+                                </span>
+
+                                <span className="deadline">
+                                    Apply Before:{" "}
+                                    {internship.applicationDeadline}
+                                </span>
+
+                            </div>
+
+                        </div>
+                    );
+                })}
+
+            </div>
+
+        </div>
+    );
+};
+
+export default DashboardCard;
