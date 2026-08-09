@@ -420,3 +420,52 @@ DATE_SUB(NOW(), INTERVAL 8 DAY),
 'OPEN',
 10,
 5);
+
+
+-- InternshipSkill Meta Data
+
+INSERT IGNORE INTO internship_skill (internship_id, skill_id) VALUES
+-- Java Developer Intern
+(1,1),   -- Java
+(1,2),   -- Spring Boot
+(1,5),   -- SQL
+
+-- Backend Developer Intern
+(2,1),   -- Java
+(2,2),   -- Spring Boot
+(2,5),   -- SQL
+
+-- Frontend Developer Intern
+(3,3),   -- HTML
+(3,4),   -- CSS
+(3,6),   -- JavaScript
+(3,7),   -- React
+
+-- Full Stack Developer Intern
+(4,1),   -- Java
+(4,2),   -- Spring Boot
+(4,5),   -- SQL
+(4,7),   -- React
+
+-- Software Engineer Intern
+(5,1),   -- Java
+(5,8),   -- Python
+(5,5),   -- SQL
+
+-- Data Analyst Intern
+(6,5),   -- SQL
+(6,8),   -- Python
+
+-- Data Engineer Intern
+(7,5),   -- SQL
+(7,8),   -- Python
+
+-- Machine Learning Intern
+(8,8),   -- Python
+
+-- DevOps Intern
+(9,9),   -- AWS
+(9,10),  -- Docker
+
+-- Android Developer Intern
+(10,1);  -- Java
