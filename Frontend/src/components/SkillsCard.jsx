@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import RoleCard from "./RoleCard";
-const SkillsCard = ({ userId }) => {
+const SkillsCard = ({ candidateId  }) => {
   const [skills, setSkills] = useState([]);
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [searchSkill, setSearchSkill] = useState("");
@@ -20,10 +20,12 @@ const SkillsCard = ({ userId }) => {
   const handleNext = () => {
     
     const request = {
-        candidateId: userId,
+        candidateId: candidateId ,
         skillIds: selectedSkills.map(skill => skill.skillId)
     };
 
+    console.log("Sending candidateId:", candidateId);
+    console.log("Sending skillIds:", selectedSkills.map(skill => skill.skillId));
     axios.post("http://localhost:8080/candidate-skills", request)
         .then(() => {
           setShowRoleCard(true);
@@ -35,7 +37,7 @@ const SkillsCard = ({ userId }) => {
   };
 
   if (showRoleCard) {
-    return <RoleCard userId={userId} />;
+    return <RoleCard candidateId={candidateId } />;
   }
   return (
     <div className="role-container">

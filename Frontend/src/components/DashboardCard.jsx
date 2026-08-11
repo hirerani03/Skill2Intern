@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 // import "../styling/Dashboard.css";
 import '../App.css'
-const DashboardCard = ({ userId }) => {
+const DashboardCard = ({ candidateId  }) => {
     const [internships, setInternships] = useState([]);
 
     const getTimeAgo = (postedDate) => {
@@ -48,7 +48,7 @@ const DashboardCard = ({ userId }) => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8080/internships/recommended/${userId}`)
+            .get(`http://localhost:8080/internships/recommended/${candidateId }`)
             .then((response) => {
                 setInternships(response.data);
             })
@@ -58,7 +58,7 @@ const DashboardCard = ({ userId }) => {
                     error
                 );
             });
-    }, [userId]);
+    }, [candidateId ]);
 
     return (
         <div className="dashboard-container">

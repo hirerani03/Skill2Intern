@@ -4,7 +4,8 @@ import axios from "axios";
 import SkillsCard from './SkillsCard';
 const CandidateDetailsForm = ({ userId }) => {
     const [showSkillsCard, setShowSkillsCard] = useState(); 
-    
+    const [candidateId, setCandidateId] = useState(null);
+
     const {
         register,
         handleSubmit,
@@ -26,7 +27,8 @@ const CandidateDetailsForm = ({ userId }) => {
                 data
             );
 
-            console.log(response.data);
+            console.log("Candidate Profile:", response.data);
+            setCandidateId(response.data.candidateId);
             setShowSkillsCard(true);
         } catch (error) {
             console.error(error);
@@ -34,7 +36,7 @@ const CandidateDetailsForm = ({ userId }) => {
     }
 
     if(showSkillsCard){
-        return <SkillsCard  userId={userId}/>;
+        return <SkillsCard  candidateId={candidateId}/>;
     }
   return (
     <div className='candidate-container'>

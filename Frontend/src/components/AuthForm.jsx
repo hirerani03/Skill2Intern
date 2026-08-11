@@ -23,6 +23,7 @@ const AuthForm = () => {
         user
       );
 
+      console.log("Signup response:", response.data);
       setUserId(response.data.userId);
       toast.success("Signup Successful!");
       

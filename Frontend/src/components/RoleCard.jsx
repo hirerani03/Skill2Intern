@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DashboardCard from "./DashboardCard";
 
-const RoleCard = ({ userId }) => {
+const RoleCard = ({ candidateId  }) => {
     const [allRoles, setAllRoles] = useState([]);
     const [selectedRoles, setSelectedRoles] = useState([]);
     const [recommendedRoles, setRecommendedRoles] = useState([]);
@@ -12,14 +12,14 @@ const RoleCard = ({ userId }) => {
     // Fetch recommended roles based on selected skills
     useEffect(() => {
         axios
-            .get(`http://localhost:8080/roles/recommended/${userId}`)
+            .get(`http://localhost:8080/roles/recommended/${candidateId }`)
             .then((response) => {
                 setRecommendedRoles(response.data);
             })
             .catch((error) => {
                 console.error(error);
             });
-    }, [userId]);
+    }, [candidateId ]);
 
     useEffect(() => {
         axios
@@ -35,7 +35,7 @@ const RoleCard = ({ userId }) => {
     const handleNext = () => {
     
         const request = {
-            candidateId: userId,
+            candidateId: candidateId ,
             roleIds: selectedRoles.map(role => role.roleId)
         };
 
@@ -84,7 +84,7 @@ const RoleCard = ({ userId }) => {
         );
 
     if (Dashboard) {
-        return <DashboardCard userId={userId} />;
+        return <DashboardCard candidateId={candidateId } />;
       }
 
   return (

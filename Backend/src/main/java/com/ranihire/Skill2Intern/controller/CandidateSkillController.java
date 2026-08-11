@@ -26,20 +26,37 @@ public class CandidateSkillController {
     @Autowired
     private SkillRepository skillRepository;
 
+
     @PostMapping("/candidate-skills")
-    public ResponseEntity<String> saveCandidateSkills(@RequestBody CandidateSkillRequest request) {
+    public ResponseEntity<String> saveCandidateSkills(
+            @RequestBody CandidateSkillRequest request) {
+
+        System.out.println("Candidate ID: " + request.getCandidateId());
+        System.out.println("Skill IDs: " + request.getSkillIds());
 
         CandidateProfile candidateProfile =
-                candidateProfileRepository.findById(request.getCandidateId()).orElseThrow();
+                candidateProfileRepository.findById(request.getCandidateId())
+                        .orElseThrow(() -> new RuntimeException(
+                                "Candidate not found: " + request.getCandidateId()
+                        ));
 
         for (Integer skillId : request.getSkillIds()) {
 
-            Skill skill = skillRepository.findById(skillId).orElseThrow();
+            System.out.println("Checking Skill ID: " + skillId);
+
+            Skill skill =
+                    skillRepository.findById(skillId)
+                            .orElseThrow(() -> new RuntimeException(
+                                    "Skill not found: " + skillId
+                            ));
+
             CandidateSkill candidateSkill =
                     new CandidateSkill(candidateProfile, skill);
 
             candidateSkillRepository.save(candidateSkill);
         }
+
         return ResponseEntity.ok("Skills saved successfully");
     }
+
 }
