@@ -14,13 +14,14 @@ import java.util.stream.Collectors;
 public class InternshipService {
     private final CandidateSkillRepository candidateSkillRepository;
     private final InternshipSkillRepository internshipSkillRepository;
-
+    private final InternshipRepository internshipRepository;
 
     public InternshipService(CandidateSkillRepository candidateSkillRepository,
-                             InternshipSkillRepository internshipSkillRepository) {
+                             InternshipSkillRepository internshipSkillRepository,
+                             InternshipRepository internshipRepository) {
         this.candidateSkillRepository = candidateSkillRepository;
         this.internshipSkillRepository = internshipSkillRepository;
-
+        this.internshipRepository = internshipRepository;
     }
 
     public List<RecommendedInternshipResponse> getRecommendedInternships(
@@ -57,5 +58,12 @@ public class InternshipService {
                     );
                 })
                 .collect(Collectors.toList());
+    }
+
+    public Internship getInternshipById(Integer internshipId)
+    {
+        return internshipRepository.findById(internshipId)
+                .orElseThrow(() ->
+                        new RuntimeException("Internship not found with id: " + internshipId) );
     }
 }
