@@ -1,165 +1,276 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 const InternshipDetails = () => {
     const { internshipId } = useParams();
 
-    const [internship, setInternship] = useState(null); 
-    const [loading, setLoading] = useState(true); 
+    const [internship, setInternship] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    useEffect(() => { 
-      axios 
-        .get(`http://localhost:8080/internships/${internshipId}`) 
-        .then((response) => { 
-          setInternship(response.data); 
-          setLoading(false); 
-        }) 
-          .catch((error) => { 
-            console.error("Error fetching internship details:", error); 
-            setError("Unable to load internship details."); 
-            setLoading(false); 
-          }); 
-        }, [internshipId]); 
-        
-        if (loading) { 
-          return <p>Loading internship details...</p>; 
-        } if (error) { return <p>{error}</p>; } 
-        
-        if (!internship) { 
-          return <p>Internship not found.</p>; 
-        }
+    useEffect(() => {
+        axios
+            .get(`http://localhost:8080/internships/${internshipId}`)
+            .then((response) => {
+                setInternship(response.data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error(
+                    "Error fetching internship details:",
+                    error
+                );
 
-  return (
-    <div className="internship-details-container">
-      {/* Internship Header */} 
-      <div className="internship-details-header"> 
-        <div className="company-header"> 
-          <img 
-            src={internship.company.logoUrl} 
-            alt={internship.company.companyName} 
-            className="company-logo" 
-          /> 
+                setError("Unable to load internship details.");
+                setLoading(false);
+            });
+    }, [internshipId]);
 
-          <div> 
-            <h1>
-              {internship.title}
-            </h1>
+    if (loading) {
+        return <p>Loading internship details...</p>;
+    }
 
-            <h3> 
-              {internship.company.companyName} 
-            </h3>
+    if (error) {
+        return <p>{error}</p>;
+    }
 
-            <p> 
-              {internship.role.roleName} 
-            </p>
+    if (!internship) {
+        return <p>Internship not found.</p>;
+    }
 
-          </div> 
-        </div>     
-      </div> 
+    return (
+        <div className="internship-details-container">
 
-      {/* Internship Basic Information */} 
-      <div className="internship-basic-info"> 
-        <div> 
-          <strong>Location</strong> 
-          <p>📍 {internship.location}</p> 
-        </div> 
+            {/* =========================================
+                INTERNSHIP HEADER
+            ========================================= */}
 
-        <div> 
-          <strong>Internship Type</strong> 
-          <p>{internship.internshipType}</p> 
-        </div> 
-        
-        <div> 
-          <strong>Duration</strong> 
-          <p>{internship.duration}</p> 
-        </div> 
-        
-        <div> 
-          <strong>Stipend</strong> 
-          <p>{internship.stipend}</p> 
-        </div> 
-        
-        <div> 
-          <strong>Openings</strong> 
-          <p>{internship.openings}</p> 
-        </div> 
-        
-        <div> 
-          <strong>Application Deadline</strong>
-          <p>{internship.applicationDeadline}</p> 
-        </div> 
-      </div> 
+            <div className="internship-details-header">
 
-      {/* About Internship */} 
-      <section className="details-section"> 
-        <h2>About the Internship</h2> 
-        <p> 
-          {internship.description} 
-        </p> 
-      </section> 
-      
-      {/* Responsibilities */} 
-      <section className="details-section"> 
-        <h2>What You'll Do</h2> 
-        <p> {internship.responsibilities} </p> 
-      </section> 
-      
-      {/* Eligibility */} 
-      <section className="details-section"> 
-        <h2>Eligibility Criteria</h2> 
-        <p> {internship.eligibility} </p> 
-      </section> 
-      
-      {/* Recruitment Process */} 
-      <section className="details-section"> 
-        <h2>Selection Process</h2> 
-        <p> {internship.recruitmentProcess} </p> 
-      </section> 
-      
-      {/* Company Information */} 
-      <section className="company-details-section"> 
-        <h2>About the Company</h2> 
-        <h3> {internship.company.companyName} </h3> 
-        <p> {internship.company.about} </p> 
-        <p> 
-          <strong>Industry:</strong>{" "} 
-          {internship.company.industry} 
-        </p> 
-        
-        <p> 
-          <strong>Company Size:</strong>{" "} 
-          {internship.company.companySize} 
-        </p> 
-        
-        <p> 
-          <strong>Location:</strong>{" "} 
-          {internship.company.location} 
-        </p> 
-        
-        <p> 
-          <strong>Website:</strong>{" "} 
-          <a href={internship.company.website} target="_blank" rel="noopener noreferrer" > Visit Company Website </a> 
-        </p> 
+                {/* ---------- TOP SECTION ---------- */}
 
-      </section> 
-      
-      {/* Additional Information */} 
-      <section className="details-section"> 
-        <p> <strong>Posted:</strong>{" "} 
-          {new Date(internship.postedDate).toLocaleDateString()} 
-        </p> 
-        
-        <p> 
-          <strong>Status:</strong>{" "} {internship.status} 
-        </p> 
-      </section>
+                <div className="internship-top-section">
 
-    </div>
-  )
-}
+                    {/* LEFT : Logo + Internship Information */}
 
-export default InternshipDetails
+                    <div className="internship-title-section">
+
+                        <img
+                            src={internship.company.logoUrl}
+                            alt={internship.company.companyName}
+                            className="details-company-logo"
+                        />
+
+                        <div className="internship-title-info">
+
+                            <h1>
+                                {internship.title}
+                            </h1>
+
+                            <h3>
+                                {internship.company.companyName}
+                            </h3>
+
+                            <p>
+                                {internship.role.roleName}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    {/* RIGHT : Skill Match */}
+
+                    <div className="skill-match-section">
+
+                        <span>
+                            Skill Match
+                        </span>
+
+                        <strong>
+                            82%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                {/* ---------- FIRST INFORMATION ROW ---------- */}
+
+                <div className="internship-info-row">
+
+                    {/* Location */}
+
+                    <div className="internship-info-item">
+
+                        <span className="info-icon">
+                            📍
+                        </span>
+
+                        <div>
+                            <span className="info-label">
+                                Location
+                            </span>
+
+                            <p>
+                                {internship.location}
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    {/* Internship Type */}
+
+                    <div className="internship-info-item">
+
+                        <span className="info-icon">
+                            💼
+                        </span>
+
+                        <div>
+                            <span className="info-label">
+                                Internship Type
+                            </span>
+
+                            <p>
+                                {internship.internshipType}
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    {/* Duration */}
+
+                    <div className="internship-info-item">
+
+                        <span className="info-icon">
+                            🕒
+                        </span>
+
+                        <div>
+                            <span className="info-label">
+                                Duration
+                            </span>
+
+                            <p>
+                                {internship.duration}
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                {/* ---------- SECOND INFORMATION ROW ---------- */}
+
+                <div className="internship-info-row second-row">
+
+                    {/* Stipend */}
+
+                    <div className="internship-info-item">
+
+                        <span className="info-icon">
+                            💰
+                        </span>
+
+                        <div>
+                            <span className="info-label">
+                                Stipend
+                            </span>
+
+                            <p>
+                                {internship.stipend}
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    {/* Openings */}
+
+                    <div className="internship-info-item">
+
+                        <span className="info-icon">
+                            👥
+                        </span>
+
+                        <div>
+                            <span className="info-label">
+                                Openings
+                            </span>
+
+                            <p>
+                                {internship.openings}
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    {/* Application Deadline */}
+
+                    <div className="internship-info-item">
+
+                        <span className="info-icon">
+                            📅
+                        </span>
+
+                        <div>
+                            <span className="info-label">
+                                Apply Before
+                            </span>
+
+                            <p>
+                                {internship.applicationDeadline}
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                {/* ---------- ACTION BUTTONS ---------- */}
+
+                <div className="internship-action-section">
+
+                    <button className="apply-button">
+                        Apply Now
+                    </button>
+
+                    <button className="save-button">
+                        Save
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            {/* =========================================
+                BELOW SECTIONS - NEXT STEP
+            ========================================= */}
+
+            {/*
+            <div className="internship-content">
+
+                About Internship
+
+                Your Preparation
+
+                Company Details
+
+            </div>
+            */}
+
+        </div>
+    );
+};
+
+export default InternshipDetails;
