@@ -1,16 +1,23 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AuthForm from "./components/AuthForm"
+import InternshipDetails from "./components/InternshipDetails";
 import './App.css'
-import CandidateDetailsForm from "./components/CandidateDetailsForm"
-import RoleCard from "./components/RoleCard"
-import SkillsCard from "./components/SkillsCard"
-import DashboardCard from "./components/DashboardCard"
+
 function App() {    
   return (
-    <div>
-      <AuthForm/>
-      {/* <RoleCard/> */}
-      {/* <DashboardCard/> */}
-    </div>
+    <BrowserRouter> 
+      <Routes> 
+        <Route 
+          path="/" 
+          element={<AuthForm />} 
+        />
+
+        <Route 
+          path="/internship/:internshipId" 
+          element={<InternshipDetails />} 
+        /> 
+      </Routes> 
+    </BrowserRouter>
   )
 }
 

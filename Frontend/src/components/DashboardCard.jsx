@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-// import "../styling/Dashboard.css";
+import { useNavigate } from "react-router-dom";
 import '../App.css'
 const DashboardCard = ({ candidateId  }) => {
+    const navigate = useNavigate();
     const [internships, setInternships] = useState([]);
 
     const getTimeAgo = (postedDate) => {
@@ -78,10 +79,7 @@ const DashboardCard = ({ candidateId  }) => {
                             className="internship-card"
                             key={internship.internshipId}
                             onClick={() =>
-                                console.log(
-                                    "Selected internship:",
-                                    internship.internshipId
-                                )
+                                navigate(`/internship/${internship.internshipId}`)
                             }
                         >
 
